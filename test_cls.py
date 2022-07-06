@@ -56,8 +56,6 @@ def main(args):
     args.input_dim = 6 if args.normal else 3
     # shutil.copy(hydra.utils.to_absolute_path('models/{}/model.py'.format(args.model.name)), '.')
 
-    a = args.model.name
-
     classifier = getattr(importlib.import_module('models.{}.model'.format(args.model.name)), 'PointTransformerCls')(
         args).cuda()
     criterion = torch.nn.CrossEntropyLoss()
