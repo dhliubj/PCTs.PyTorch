@@ -1,19 +1,24 @@
 batch_size: 16
-epoch: 200
+epoch: 20
 learning_rate: 1e-3
 gpu: 1
 num_point: 1024
 optimizer: Adam
 weight_decay: 1e-4
-normal: True
+normal: False
+custom_output_dir: modelnet40
 
 defaults:
   - model: Menghao
+  - _self_
 
 hydra:
   run:
-    dir: log/cls/${model.name}
+    dir: log/cls/${model.name}_${custom_output_dir}_e${epoch}_${num_point}
 
   sweep:
     dir: log/cls
-    subdir: ${model.name}
+    subdir: ${model.name}_${custom_output_dir}_e${epoch}_${num_point}
+
+  job:
+    chdir: True
