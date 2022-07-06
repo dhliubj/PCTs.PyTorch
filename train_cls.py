@@ -49,7 +49,7 @@ def main(args):
     os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpu)
     logger = logging.getLogger(__name__)
 
-    print(args.pretty())
+    # print(args.pretty())
 
     '''DATA LOADING'''
     logger.info('Load dataset ...')
