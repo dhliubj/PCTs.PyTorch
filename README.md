@@ -1,39 +1,22 @@
-# Pytorch Implementation of Various Point Transformers
+# PointCloudTransformers
 
-Recently, various methods applied transformers to point clouds: [PCT: Point Cloud Transformer (Meng-Hao Guo et al.)](https://arxiv.org/abs/2012.09688), [Point Transformer (Nico Engel et al.)](https://arxiv.org/abs/2011.00931), [Point Transformer (Hengshuang Zhao et al.)](https://arxiv.org/abs/2012.09164). This repo is a pytorch implementation for these methods and aims to compare them under a fair setting. Currently, all three methods are implemented, while tuning their hyperparameters.
+This repository is forked from [qq456cvb/Point-Transformers](https://github.com/qq456cvb/Point-Transformers), and I made the following changes to the code related to the classification task.
 
+## 1. To adapt `Hydar 1.1 & 1.2`
 
-## Classification
-### Data Preparation
-Download alignment **ModelNet** [here](https://shapenet.cs.stanford.edu/media/modelnet40_normal_resampled.zip) and save in `modelnet40_normal_resampled`.
+- Delete the first line of `config/model/*.yaml` file: `# @package _group_` (this syntax is no longer supported in newer versions of Hydra)
 
-### Run
-Change which method to use in `config/cls.yaml` and run
-```
-python train_cls.py
-```
-### Results
-Using Adam with learning rate decay 0.3 for every 50 epochs, train for 200 epochs; data augmentation follows [this repo](https://github.com/yanx27/Pointnet_Pointnet2_pytorch). For Hengshuang and Nico, initial LR is 1e-3 (I would appreciate if someone could fine-tune these hyper-paramters); for Menghao, initial LR is 1e-4, as suggested by the [author](https://github.com/MenghaoGuo). ModelNet40 classification results (instance average) are listed below:
-| Model | Accuracy |
-|--|--|
-| Hengshuang | 91.7 |
-| Menghao | 92.6 |
-| Nico |  85.5 |
+- `cls.yaml` Modify:
+  - `defaults` added `_self_` (required for higher versions)
+  - Add `hydra.job.chdir = Ture` (higher versions already have this property set to `False` by default)
+  - Add `custom_output_dir` to allow users to customize the output path, so that the same task can be run multiple times.
 
+## 2. Added `test_cls.py`
 
-## Part Segmentation
-### Data Preparation
-Download alignment **ShapeNet** [here](https://shapenet.cs.stanford.edu/media/shapenetcore_partanno_segmentation_benchmark_v0_normal.zip) and save in `data/shapenetcore_partanno_segmentation_benchmark_v0_normal`.
+- The purpose of adding this script is to perform deep learning testing and validation experiments separately.
+- We conducted test experiments on the ModelNet40 dataset and the program works fine.
+- Run with `python test_cls.py`.
 
-### Run
-Change which method to use in `config/partseg.yaml` and run
-```
-python train_partseg.py
-```
-### Results
-Currently only Hengshuang's method is implemented.
+## Notes
 
-### Miscellaneous
-Some code and training settings are borrowed from https://github.com/yanx27/Pointnet_Pointnet2_pytorch.
-Code for [PCT: Point Cloud Transformer (Meng-Hao Guo et al.)](https://arxiv.org/abs/2012.09688) is adapted from the author's Jittor implementation https://github.com/MenghaoGuo/PCT.
-
+For other relevant reference details, please check the original repository [qq456cvb/Point-Transformers](https://github.com/qq456cvb/Point-Transformers).
