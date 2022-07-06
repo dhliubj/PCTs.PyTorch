@@ -42,7 +42,6 @@ def main(args):
     '''HYPER PARAMETER'''
     os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpu)
     os.environ["HYDRA_FULL_ERROR"] = "1"
-    os.environ["hydra.job.chdir"] = "True"
     logger = logging.getLogger(__name__)
 
     '''DATA LOADING'''
