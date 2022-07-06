@@ -47,7 +47,7 @@ def main(args):
 
     '''DATA LOADING'''
     logger.info('Load dataset ...')
-    DATA_PATH = hydra.utils.to_absolute_path('./data/modelnet40_normal_resampled/')
+    DATA_PATH = hydra.utils.to_absolute_path('modelnet40_normal_resampled/')
 
     TEST_DATASET = ModelNetDataLoader(root=DATA_PATH, npoint=args.num_point, split='test', normal_channel=args.normal)
     testDataLoader = torch.utils.data.DataLoader(TEST_DATASET, batch_size=args.batch_size, shuffle=False, num_workers=4)
