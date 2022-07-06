@@ -1,4 +1,4 @@
-# PointCloudTransformers
+# Point Cloud Transformers (PCTs.PyTorch)
 
 This repository is forked from [qq456cvb/Point-Transformers](https://github.com/qq456cvb/Point-Transformers), and I made the following changes to the code related to the classification task.
 
