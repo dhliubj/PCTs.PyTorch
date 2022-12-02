@@ -1,5 +1,7 @@
 # Point Cloud Transformers (PCTs.PyTorch)
 
+ ![visitors](https://visitor-badge.glitch.me/badge?page_id=https://github.com/dhliubj/PCTs.PyTorch)
+
 This repository is forked from [qq456cvb/Point-Transformers](https://github.com/qq456cvb/Point-Transformers), and I made the following changes to the code related to the classification task.
 
 ## 1. To adapt `Hydar 1.1 & 1.2`
